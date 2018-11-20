@@ -1,6 +1,6 @@
 from scapy.all import *
 import csv
-from course_project.count_flows import *
+# from course_project.count_flows import *
 PATH = "/home/radiantwings/Documents/univ1_trace/univ1_pt3"
 
 def get_total_duration(flow):
@@ -12,8 +12,12 @@ def get_total_duration(flow):
 if __name__ == "__main__":
     pcap = PcapReader(PATH)
 
-    output = open("flow_durations.csv", "w")
-    csv_writer = csv.writer(output, delimiter=',',
+    output = open("tcp_flow_durations.csv", "w")
+    tcp_writer = csv.writer(output, delimiter=',',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    udp_output = open("udp_flow_durations.csv", "w")
+    udp_writer = csv.writer(output, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
     tcpflows = {}
@@ -32,9 +36,9 @@ if __name__ == "__main__":
                 if a_to_b not in tcpflows and b_to_a not in tcpflows:
                     tcpflows[a_to_b] = []
                 if a_to_b in tcpflows:
-                    tcpflows[a_to_b].append(i + 1)
+                    tcpflows[a_to_b].append(p.time)
                 elif b_to_a in tcpflows:
-                    tcpflows[b_to_a].append(i + 1)
+                    tcpflows[b_to_a].append(p.time)
             elif UDP in p:
                 a_to_b = p[IP].src + ":" + str(p[UDP].sport) + " -> " + p[IP].dst + ":" + str(p[UDP].dport)
                 b_to_a = p[IP].dst + ":" + str(p[UDP].dport) + " -> " + p[IP].src + ":" + str(p[UDP].sport)
@@ -44,9 +48,9 @@ if __name__ == "__main__":
                 if a_to_b not in udpflows and b_to_a not in udpflows:
                     udpflows[a_to_b] = []
                 if a_to_b in udpflows:
-                    udpflows[a_to_b].append(i + 1)
+                    udpflows[a_to_b].append(p.time)
                 elif b_to_a in udpflows:
-                    udpflows[b_to_a].append(i + 1)
+                    udpflows[b_to_a].append(p.time)
             # if (i > 200):
             #
             #     for k, v in flows.items():
@@ -55,9 +59,14 @@ if __name__ == "__main__":
             i += 1
 
     for k, v in tcpflows.items():
-        print(k, v)
+        # print(k, v)
+        tcp_writer.writerow([k, v[len(v) - 1] - v[0]])
 
     print("============================UDP FLOWS============================")
     for k, v in udpflows.items():
-        print(k, v)
+        # print(k, v)
+        udp_writer.writerow([k, v[len(v) - 1] - v[0]])
+
+    output.close()
+    udp_output.close()
 
