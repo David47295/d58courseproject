@@ -106,3 +106,6 @@ venv.bak/
 # Pycharm
 .idea/
 *.csv
+
+#ignore pcap files
+univ1_pt3
