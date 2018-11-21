@@ -1,8 +1,8 @@
 from scapy.all import *
 import csv
-# from util import *
-TCP_FILE_PATH = "/home/radiantwings/PycharmProjects/d58courseproject/univ1_pt3_tcp.csv"
-UDP_FILE_PATH = "/home/radiantwings/PycharmProjects/d58courseproject/univ1_pt3_udp.csv"
+from utils import *
+from flow_size import *
+from flow_duration import get_flow_durations
 
 
 if __name__ == "__main__":
@@ -51,26 +51,10 @@ if __name__ == "__main__":
 
     udp_file.close()
 
-    print("Writing to file")
+    print("================RESULTS================")
 
-    tcp_output = open("tcp_flow_durations.csv", "w")
-    tcp_writer = csv.writer(tcp_output, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    # get_flow_durations(tcpflows, udpflows)
 
-    udp_output = open("udp_flow_durations.csv", "w")
-    udp_writer = csv.writer(udp_output, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    # get_flow_size_in_packets(tcpflows, udpflows)
 
-    for k, v in tcpflows.items():
-        duration = 0
-        for p in v:
-            duration += float(p["tcp.time_delta"])
-        tcp_writer.writerow([k, duration])
-
-    for k, v in udpflows.items():
-
-        udp_writer.writerow([k, float(v[len(v) - 1]["frame.time_epoch"]) - float(v[0]["frame.time_epoch"])])
-
-    tcp_output.close()
-    udp_output.close()
-
+    get_flow_size_in_bytes(tcpflows, udpflows)
