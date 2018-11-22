@@ -63,8 +63,8 @@ if __name__ == "__main__":
     # calculate_packet_interarrival(tcpflows, udpflows)
     #
     # compute_final_state(tcpflows)
-
-    rtt_estimation_packet_size(tcpflows)
+    #
+    # rtt_estimation_packet_size(tcpflows)
 
     rtt_estimation_bytes_size(tcpflows)
 

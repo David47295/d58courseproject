@@ -20,12 +20,12 @@ G = 1
 K = 4
 
 def rtt_estimation_packet_size(tcpflows):
-    output = open("rtt_estimation_top3_packet.csv", 'w')
-    csv_writer = csv.writer(output, delimiter=',',
-                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
 
     for i in range(len(TOP_THREE_PACKET_SIZE)):
+        output = open("top3_packet_" + str(i) + ".csv", 'w')
+        csv_writer = csv.writer(output, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
         srtt = 0
         rttvar = 0
         # rto = 0
@@ -45,17 +45,17 @@ def rtt_estimation_packet_size(tcpflows):
                 #     rto = 1
                 # elif (rto > 60):
                 #     rto = 60
-        print(srtt)
+        # print(srtt)
+        output.close()
 
-    output.close()
+
 
 def rtt_estimation_bytes_size(tcpflows):
-    output = open("rtt_estimation_top3_bytes.csv", 'w')
-    csv_writer = csv.writer(output, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
-
     for i in range(len(TOP_THREE_BYTE_SIZE)):
+        output = open("top3_bytes" + str(i) + ".csv", 'w')
+        csv_writer = csv.writer(output, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
         srtt = 0
         rttvar = 0
         # rto = 0
@@ -75,17 +75,16 @@ def rtt_estimation_bytes_size(tcpflows):
                 #     rto = 1
                 # elif (rto > 60):
                 #     rto = 60
-        print(srtt)
+        output.close()
 
-    output.close()
+
 
 def rtt_estimation_duration(tcpflows):
-    output = open("rtt_estimation_top3_longest.csv", 'w')
-    csv_writer = csv.writer(output, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
-
     for i in range(len(TOP_THREE_LONGEST)):
+        output = open("top3_longest" + str(i) + ".csv", 'w')
+        csv_writer = csv.writer(output, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
         srtt = 0
         rttvar = 0
         # rto = 0
@@ -105,6 +104,6 @@ def rtt_estimation_duration(tcpflows):
                 #     rto = 1
                 # elif (rto > 60):
                 #     rto = 60
-        print(srtt)
+        output.close()
 
-    output.close()
+
