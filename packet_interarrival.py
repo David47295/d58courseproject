@@ -11,12 +11,12 @@ def calculate_packet_interarrival(tcpflows, udpflows):
 
     for k, flow in tcpflows.items():
         for i in range(1,len(flow)):
-            time = flow[i]["frame.time_epoch"] - flow[i-1]["frame.time_epoch"]
+            time = float(flow[i]["frame.time_epoch"]) - float(flow[i-1]["frame.time_epoch"])
             tcp_writer.writerow([time])
 
     for k, flow in udpflows.items():
         for i in range(1,len(flow)):
-            time = flow[i]["frame.time_epoch"] - flow[i-1]["frame.time_epoch"]
+            time = float(flow[i]["frame.time_epoch"]) - float(flow[i-1]["frame.time_epoch"])
             udp_writer.writerow([time])
 
     tcp_output.close()

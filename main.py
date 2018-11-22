@@ -54,13 +54,13 @@ if __name__ == "__main__":
 
     print("================RESULTS================")
 
-    get_flow_durations(tcpflows, udpflows)
-
-    get_flow_size_in_packets(tcpflows, udpflows)
-
-    get_flow_size_in_bytes(tcpflows, udpflows)
-
-    get_flow_header_overhead(tcpflows)
+    # get_flow_durations(tcpflows, udpflows)
+    #
+    # get_flow_size_in_packets(tcpflows, udpflows)
+    #
+    # get_flow_size_in_bytes(tcpflows, udpflows)
+    #
+    # get_flow_header_overhead(tcpflows)
 
     calculate_packet_interarrival(tcpflows, udpflows)
-    
+
