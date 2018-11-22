@@ -3,6 +3,7 @@ import csv
 from utils import *
 from flow_size import *
 from flow_duration import get_flow_durations
+from packet_interarrival import calculate_packet_interarrival
 
 
 if __name__ == "__main__":
@@ -53,10 +54,13 @@ if __name__ == "__main__":
 
     print("================RESULTS================")
 
-    # get_flow_durations(tcpflows, udpflows)
-    #
-    # get_flow_size_in_packets(tcpflows, udpflows)
-    #
-    # get_flow_size_in_bytes(tcpflows, udpflows)
+    get_flow_durations(tcpflows, udpflows)
+
+    get_flow_size_in_packets(tcpflows, udpflows)
+
+    get_flow_size_in_bytes(tcpflows, udpflows)
 
     get_flow_header_overhead(tcpflows)
+
+    calculate_packet_interarrival(tcpflows, udpflows)
+    
