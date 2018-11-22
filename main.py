@@ -51,8 +51,6 @@ if __name__ == "__main__":
 
     udp_file.close()
 
-    print("================RESULTS================")
-
     # get_flow_durations(tcpflows, udpflows)
     #
     # get_flow_size_in_packets(tcpflows, udpflows)
