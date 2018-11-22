@@ -3,6 +3,7 @@ from flow_size import *
 from flow_duration import get_flow_durations
 from packet_interarrival import calculate_packet_interarrival
 from tcp_state import compute_final_state
+from rtt_estimation import *
 
 
 if __name__ == "__main__":
@@ -60,5 +61,11 @@ if __name__ == "__main__":
     # get_flow_header_overhead(tcpflows)
     #
     # calculate_packet_interarrival(tcpflows, udpflows)
+    #
+    # compute_final_state(tcpflows)
 
-    compute_final_state(tcpflows)
+    rtt_estimation_packet_size(tcpflows)
+
+    rtt_estimation_bytes_size(tcpflows)
+
+    rtt_estimation_duration(tcpflows)
