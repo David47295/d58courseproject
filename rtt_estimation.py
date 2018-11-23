@@ -54,13 +54,8 @@ def rtt_estimation_packet_size(tcpflows):
                 else:
                     rttvar = (1 - BETA) * rttvar + BETA * abs(srtt - rtt)
                     srtt = (1 - ALPHA) * srtt + ALPHA * rtt
-                # rto = srtt + max(G, K * rttvar)
                 csv_writer.writerow([TOP_THREE_PACKET_SIZE[i], rtt, srtt])
-                # if (rto < 1):
-                #     rto = 1
-                # elif (rto > 60):
-                #     rto = 60
-        # print(srtt)
+
         output.close()
 
 
@@ -73,7 +68,6 @@ def rtt_estimation_bytes_size(tcpflows):
         csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
         srtt = 0
         rttvar = 0
-        # rto = 0
         flow = tcpflows[TOP_THREE_BYTE_SIZE[i]]
         for p in range(len(flow)):
             if flow[p]["tcp.analysis.ack_rtt"] != '' and flow[p]["tcp.analysis.retransmission"] != '1':
@@ -84,12 +78,8 @@ def rtt_estimation_bytes_size(tcpflows):
                 else:
                     rttvar = (1 - BETA) * rttvar + BETA * abs(srtt - rtt)
                     srtt = (1 - ALPHA) * srtt + ALPHA * rtt
-                # rto = srtt + max(G, K * rttvar)
                 csv_writer.writerow([TOP_THREE_BYTE_SIZE[i], rtt, srtt])
-                # if (rto < 1):
-                #     rto = 1
-                # elif (rto > 60):
-                #     rto = 60
+
         output.close()
 
 
@@ -102,7 +92,7 @@ def rtt_estimation_duration(tcpflows):
         csv_writer.writerow(["Flow", "RTT", "Estimated RTT"])
         srtt = 0
         rttvar = 0
-        # rto = 0
+
         flow = tcpflows[TOP_THREE_LONGEST[i]]
         for p in range(len(flow)):
             if flow[p]["tcp.analysis.ack_rtt"] != '' and flow[p]["tcp.analysis.retransmission"] != '1':
@@ -113,12 +103,9 @@ def rtt_estimation_duration(tcpflows):
                 else:
                     rttvar = (1 - BETA) * rttvar + BETA * abs(srtt - rtt)
                     srtt = (1 - ALPHA) * srtt + ALPHA * rtt
-                # rto = srtt + max(G, K * rttvar)
+
                 csv_writer.writerow([TOP_THREE_LONGEST[i], rtt, srtt])
-                # if (rto < 1):
-                #     rto = 1
-                # elif (rto > 60):
-                #     rto = 60
+
         output.close()
 
 def get_representative_rtt(flow):
@@ -159,7 +146,7 @@ def rtt_estimation_most_connections(tcpflows):
             src = flow[0]["ip.src"]
             dst = flow[0]["ip.dst"]
             if src == top_pair.src and dst == top_pair.dst:
-                estimated_rtt_list.append({'estimated_rtt': get_representative_rtt(flow), 'time_epoch' : flow[0]['frame.time_epoch']})
+                estimated_rtt_list.append({'estimated_rtt': get_representative_rtt(flow), 'time_epoch': float(flow[0]['frame.time_epoch'])})
 
         new_estimated_rtt_list = sorted(estimated_rtt_list, key=lambda r:float(r['time_epoch']))
         output = open("most_connections" + str(i) + ".csv", 'w')
@@ -167,7 +154,7 @@ def rtt_estimation_most_connections(tcpflows):
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
         for ertt in new_estimated_rtt_list:
-            csv_writer.writerow([ertt['estimated_rtt']])
+            csv_writer.writerow([ertt['estimated_rtt'], ertt['time_epoch']])
         i += 1
         output.close()
 

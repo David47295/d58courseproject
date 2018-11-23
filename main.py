@@ -52,22 +52,22 @@ if __name__ == "__main__":
 
     udp_file.close()
 
-    # get_flow_durations(tcpflows, udpflows)
-    #
-    # get_flow_size_in_packets(tcpflows, udpflows)
-    #
-    # get_flow_size_in_bytes(tcpflows, udpflows)
-    #
-    # get_flow_header_overhead(tcpflows)
-    #
-    # calculate_packet_interarrival(tcpflows, udpflows)
-    #
-    # compute_final_state(tcpflows)
-    #
-    # rtt_estimation_packet_size(tcpflows)
-    #
-    # rtt_estimation_bytes_size(tcpflows)
-    #
-    # rtt_estimation_duration(tcpflows)
+    get_flow_durations(tcpflows, udpflows)
+
+    get_flow_size_in_packets(tcpflows, udpflows)
+
+    get_flow_size_in_bytes(tcpflows, udpflows)
+
+    get_flow_header_overhead(tcpflows)
+
+    calculate_packet_interarrival(tcpflows, udpflows)
+
+    compute_final_state(tcpflows)
+
+    rtt_estimation_packet_size(tcpflows)
+
+    rtt_estimation_bytes_size(tcpflows)
+
+    rtt_estimation_duration(tcpflows)
 
     rtt_estimation_most_connections(tcpflows)
