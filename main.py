@@ -65,7 +65,9 @@ if __name__ == "__main__":
     # compute_final_state(tcpflows)
     #
     # rtt_estimation_packet_size(tcpflows)
+    #
+    # rtt_estimation_bytes_size(tcpflows)
+    #
+    # rtt_estimation_duration(tcpflows)
 
-    rtt_estimation_bytes_size(tcpflows)
-
-    rtt_estimation_duration(tcpflows)
+    rtt_estimation_most_connections(tcpflows)
