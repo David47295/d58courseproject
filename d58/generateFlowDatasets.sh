@@ -1,4 +1,4 @@
-#bin/bash
+#!/bin/sh
 
 echo "Generating univ1_pt3_tcp.csv"
 

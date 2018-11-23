@@ -1,12 +1,13 @@
-from utils import *
-from flow_size import *
-from flow_duration import get_flow_durations
-from packet_interarrival import calculate_packet_interarrival
-from tcp_state import compute_final_state
-from rtt_estimation import *
-
+from d58.flow_size import *
+from d58.flow_duration import get_flow_durations
+from d58.packet_interarrival import calculate_packet_interarrival
+from d58.tcp_state import compute_final_state
+from d58.rtt_estimation import *
+import subprocess
 
 if __name__ == "__main__":
+    subprocess.call(['./generateFlowDatasets.sh'])
+    TCP_FILE_PATH = './univ1_pt3_tcp.csv'
     tcp_file = open(TCP_FILE_PATH, 'r')
     # tcp_reader = csv.reader(tcp_file, delimiter=',', quotechar='|')
     tcp_reader = csv.DictReader(tcp_file)
@@ -31,6 +32,7 @@ if __name__ == "__main__":
 
     tcp_file.close()
 
+    UDP_FILE_PATH = './univ1_pt3_udp.csv'
     udp_file = open(UDP_FILE_PATH, 'r')
     # tcp_reader = csv.reader(tcp_file, delimiter=',', quotechar='|')
     udp_reader = csv.DictReader(udp_file)
